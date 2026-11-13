@@ -6,27 +6,52 @@ from pathlib import Path
 
 import streamlit as st
 
-import task1_module
+import Candidate_Portal
 
 import resume_module
 
 
 
 st.set_page_config(
-
     page_title="BlueTip AI | Candidate Portal",
-
-    page_icon="⚡",
-
+    page_icon="bluetipai_icon.svg",
     layout="wide",
-
     initial_sidebar_state="expanded"
-
 )
 
 
 
-LOGO_PATH = Path(__file__).with_name("bluetipai_logo.svg")
+SVG_LOGO = r"""
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+  <title id="title">BlueTip AI</title>
+  <desc id="desc">BlueTip AI logo with a geometric blue and cyan technology mark and wordmark.</desc>
+  <defs>
+    <linearGradient id="bt-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#69A7FF"/>
+      <stop offset="55%" stop-color="#477CF0"/>
+      <stop offset="100%" stop-color="#46D6D0"/>
+    </linearGradient>
+    <linearGradient id="bt-text" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F5F8FF"/>
+      <stop offset="100%" stop-color="#BFD5FF"/>
+    </linearGradient>
+    <filter id="bt-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(12 10)">
+    <path d="M50 4 L91 27 L91 73 L50 96 L9 73 L9 27 Z" fill="#101D33" stroke="url(#bt-gradient)" stroke-width="3"/>
+    <path d="M30 31 H52 C66 31 72 38 72 48 C72 58 66 65 52 65 H30 Z" fill="none" stroke="url(#bt-gradient)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 31 L48 65 M48 48 H70" fill="none" stroke="#EAF3FF" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="75" cy="25" r="6" fill="#46D6D0" filter="url(#bt-glow)"/>
+    <path d="M76 25 L85 16" stroke="#46D6D0" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="125" y="66" font-family="Manrope, Inter, Arial, sans-serif" font-size="48" font-weight="800" letter-spacing="-1.8" fill="url(#bt-text)">BlueTip</text>
+  <text x="310" y="66" font-family="Manrope, Inter, Arial, sans-serif" font-size="48" font-weight="800" letter-spacing="-1.8" fill="#62A5FF">AI</text>
+  <text x="128" y="91" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="3.2" fill="#91A8C8">INTELLIGENT TALENT PLATFORM</text>
+</svg>
+"""
 
 
 
@@ -121,43 +146,23 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 
 def render_logo(width=190):
-    """Render the SVG logo at the exact width requested by each page."""
-    if LOGO_PATH.is_file():
-        import base64
-
-        with open(LOGO_PATH, "rb") as file:
-            svg_base64 = base64.b64encode(file.read()).decode("ascii")
-
-        st.markdown(
-            f"""
-            <div style="
-                display:block;
-                width:{width}px !important;
-                min-width:{width}px !important;
-                max-width:none !important;
-                margin:0;
-                padding:0;
-                line-height:0;
-            ">
-                <img
-                    src="data:image/svg+xml;base64,{svg_base64}"
-                    alt="BlueTip AI - Intelligent Talent Platform"
-                    width="{width}"
-                    style="
-                        display:block;
-                        width:{width}px !important;
-                        min-width:{width}px !important;
-                        max-width:none !important;
-                        height:auto !important;
-                        object-fit:contain;
-                    "
-                >
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown("## ⚡ BlueTip AI")
+    """Render the inline SVG logo at the width requested by each page."""
+    st.markdown(
+        f"""
+        <div style="width:{width}px; max-width:100%; margin:0; padding:0; line-height:0;">
+            <style>
+                .bluetip-inline-logo svg {{
+                    display:block;
+                    width:100% !important;
+                    height:auto !important;
+                    max-width:100% !important;
+                }}
+            </style>
+            <div class="bluetip-inline-logo">{SVG_LOGO}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def init_state():
@@ -532,7 +537,7 @@ def render_app_shell():
 
     elif selected == "profile":
 
-        task1_module.render_candidate_profile()
+        Candidate_Portal.render_candidate_profile()
 
     elif selected == "resume":
 

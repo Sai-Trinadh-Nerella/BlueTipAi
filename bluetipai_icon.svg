@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="BlueTip AI icon">
+  <defs>
+    <linearGradient id="bt-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#69A7FF"/>
+      <stop offset="55%" stop-color="#477CF0"/>
+      <stop offset="100%" stop-color="#46D6D0"/>
+    </linearGradient>
+    <filter id="bt-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(12 10)">
+    <path d="M50 4 L91 27 L91 73 L50 96 L9 73 L9 27 Z" fill="#101D33" stroke="url(#bt-gradient)" stroke-width="3"/>
+    <path d="M30 31 H52 C66 31 72 38 72 48 C72 58 66 65 52 65 H30 Z" fill="none" stroke="url(#bt-gradient)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 31 L48 65 M48 48 H70" fill="none" stroke="#EAF3FF" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="75" cy="25" r="6" fill="#46D6D0" filter="url(#bt-glow)"/>
+    <path d="M76 25 L85 16" stroke="#46D6D0" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
